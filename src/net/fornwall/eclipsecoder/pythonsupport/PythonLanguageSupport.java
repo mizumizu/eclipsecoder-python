@@ -45,7 +45,7 @@ public class PythonLanguageSupport extends LanguageSupport {
 
 	@Override
 	protected String getCodeTemplate() {
-		return "class $CLASSNAME$:\n\n\tdef $METHODNAME$($METHODPARAMS$):\n\t\treturn $DUMMYRETURN$\n";
+		return PythonSupportPlugin.getDefault().getCodeTemplate();
 	}
 
 	@Override
@@ -62,10 +62,4 @@ public class PythonLanguageSupport extends LanguageSupport {
 	protected String getSolutionFileName() {
 		return getProblemStatement().getSolutionClassName() + ".py";
 	}
-
-	@Override
-	protected String getSubmission() throws Exception {
-		throw new UnsupportedOperationException("Python support is only for practising");
-	}
-
 }

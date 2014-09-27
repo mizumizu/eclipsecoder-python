@@ -1,5 +1,6 @@
 package net.fornwall.eclipsecoder.pythonsupport;
 
+
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -7,6 +8,7 @@ import org.osgi.framework.BundleContext;
  * The main plugin class to be used in the desktop.
  */
 public class PythonSupportPlugin extends AbstractUIPlugin {
+	public static final String CODE_TEMPLATE_PREFERENCE = "codeTemplatePreference";
 
 	private static PythonSupportPlugin plugin;
 
@@ -18,6 +20,7 @@ public class PythonSupportPlugin extends AbstractUIPlugin {
 	 * The constructor.
 	 */
 	public PythonSupportPlugin() {
+		super();
 		plugin = this;
 	}
 
@@ -29,4 +32,8 @@ public class PythonSupportPlugin extends AbstractUIPlugin {
 		super.stop(context);
 		plugin = null;
 	}
+	
+	public String getCodeTemplate() {
+        return getPreferenceStore().getString(CODE_TEMPLATE_PREFERENCE);
+    }
 }

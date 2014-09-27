@@ -6,7 +6,9 @@ import net.fornwall.eclipsecoder.stats.CodeGenerator;
 import net.fornwall.eclipsecoder.stats.ProblemStatement;
 
 public class PythonCodeGenerator extends CodeGenerator {
-
+	
+	private static final String TAB = "    ";
+	
 	public PythonCodeGenerator(ProblemStatement problemStatement) {
 		super(problemStatement);
 	}
@@ -64,7 +66,7 @@ public class PythonCodeGenerator extends CodeGenerator {
 						.get(i), problemStatement.getParameterTypes().get(i)));
 			}
 
-			builder.append("\n\t\t");
+			builder.append("\t\t\n\t\t");
 			builder.append(getCreateStatement(testCase.returnValue, "expected", problemStatement.getReturnType()));
 			builder.append("\t\t");
 
@@ -77,13 +79,13 @@ public class PythonCodeGenerator extends CodeGenerator {
 			builder.append(")\n");
 
 			String maybeDouble = (problemStatement.getReturnType() == Double.class) ? "Double" : "";
-			builder.append("\n\t\tself.assert" + maybeDouble + "Equal(expected, actual)\n\n");
+			builder.append("\t\t\n\t\tself.assert" + maybeDouble + "Equal(expected, actual)\n\n");
 			count++;
 		}
 
 		builder.append("if __name__ == '__main__': unittest.main()\n");
 
-		return builder.toString();
+		return builder.toString().replaceAll("\\t", TAB);
 	}
 
 	@Override
